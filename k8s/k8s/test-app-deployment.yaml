@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: api-service
-        image: kirankumarhm/test-api-service:1.0.0
+        image: kirankumarhm/test-api-service:1.1.0
         imagePullPolicy: IfNotPresent 
         ports:
         - containerPort: 8080
