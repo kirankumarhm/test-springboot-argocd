@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+	name: test-app
+	namespace: argocd
+spec:
+	destination:
+		namespace: default
+		server: https://kubernetes.default.svc
+	source: 
+		repoURL: https://github.com/kirankumarhm/test-springboot-argocd.git
+		targetRevision: HEAD
+		path: test/k8s/k8s
+		namespace: testapps
+	syncPolicy:
+		syncOptions:
+		- CreateNamespace=true
+		
+		automated:
+			selfHeal: true
+			prune: true
