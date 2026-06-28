@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-gateway
+  # Notice: The rewrite-target annotation is completely gone
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /api
+        pathType: Prefix # <-- We can use Prefix again because there is no Regex!
+        backend:
+          service:
+            name: api-service-clusterip
+            port:
+              number: 80
