@@ -3,11 +3,18 @@ kind: Application
 metadata:
   name: test-springboot-argocd
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io #It automatically handles the finalizers and cascades the deletion for you:
 spec:
   project: default
   source:
     repoURL: https://github.com/kirankumarhm/test-springboot-argocd.git
-    path: k8s/k8s
+#    path: k8s/k8s	# to use without helm chart,
+# to use helm chart, uncomment the below lines and comment the above path line
+    helm:
+      valueFiles:
+        - values.yaml
+    path: k8s/helm/test-app-service
   destination:
     server: https://kubernetes.default.svc
     namespace: testapps
